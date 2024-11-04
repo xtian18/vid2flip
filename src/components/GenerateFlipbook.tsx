@@ -1,7 +1,10 @@
-import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg";
 import { FaGears } from "react-icons/fa6";
 import jsPDF from "jspdf";
 import { useState } from "react";
+
+interface GenerateFlipbookProps {
+  frames: string[];
+}
 
 const paperDimensions = {
   a4: {
@@ -18,7 +21,7 @@ const paperDimensions = {
   },
 };
 
-const GenerateFlipbook = () => {
+const GenerateFlipbook: React.FC<GenerateFlipbookProps> = ({frames}) => {
   const [frameWidth, setFrameWidth] = useState<number>(70);
   const [frameHeight, setFrameHeight] = useState<number>(50);
   const [flipBookPageWidth, setFlipBookPageWidth] = useState<number>(120);
@@ -230,9 +233,10 @@ const GenerateFlipbook = () => {
       <div className="flex justify-end">
         <button
           onClick={handleGeneratePDF}
-          className="bg-amber-500 hover:bg-amber-600 text-white rounded-md inline-flex items-center"
+          className={`rounded-md inline-flex items-center
+            ${frames.length === 0 ? "bg-gray-400 cursor-not-allowed text-gray-700" : "bg-amber-500 hover:bg-amber-600 text-white"}`}
+          disabled={frames.length === 0}
         >
-          {/* <span className='py-2 px-4 bg-black/10'><FontAwesomeIcon icon={faBarcode} /></span> */}
           <span className="py-2 px-4 bg-black/10 rounded-l-lg">
             <FaGears className="w-6 h-6" />
           </span>
