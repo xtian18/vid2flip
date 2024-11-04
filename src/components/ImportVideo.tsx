@@ -8,7 +8,7 @@ interface ImportVideoProps {
   setAspectRatio: (view: number) => void;
   framesPerSecond: number;
   setFramesPerSecond: (view: number) => void;
-  frames: string[];
+  // frames: string[];
   setFrames: (view: string[]) => void;
 }
 
@@ -19,7 +19,7 @@ const ImportVideo: React.FC<ImportVideoProps> = ({
   setAspectRatio,
   framesPerSecond,
   setFramesPerSecond,
-  frames,
+  // frames,
   setFrames,
 }) => {
   const ffmpeg = createFFmpeg({ log: false });
@@ -50,6 +50,8 @@ const ImportVideo: React.FC<ImportVideoProps> = ({
     } else {
       console.error("No files selected or file input is null.");
     }
+
+    console.log(aspectRatio)
   };
 
   const loadFFmpeg = async () => {

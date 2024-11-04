@@ -26,12 +26,12 @@ function App() {
             setAspectRatio={setAspectRatio}
             framesPerSecond={framesPerSecond}
             setFramesPerSecond={setFramesPerSecond}
-            frames={frames}
+            // frames={frames}
             setFrames={setFrames}
           />
         );
       case "previewTab":
-        return <PreviewFrames frames={frames}/>;
+        return <PreviewFrames/>;
       case "pdfTab":
         return <GenerateFlipbook frames={frames}/>;
     }
