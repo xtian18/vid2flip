@@ -121,7 +121,7 @@ const GenerateFlipbook: React.FC<GenerateFlipbookProps> = ({frames}) => {
       <h1 className="text-4xl font-bold">Generate Flipbook</h1>
       {/* Flipbook page settings */}
       <div className="bg-white p-4 my-4 rounded-md drop-shadow">
-        <h2 className="text-lg font-semibold">Flipbook Page Settings</h2>
+        <h2 className="text-lg font-semibold">PDF Settings</h2>
         <div className="flex flex-wrap space-x-2 mt-2">
           <div className="flex-1">
             <label
@@ -163,7 +163,7 @@ const GenerateFlipbook: React.FC<GenerateFlipbookProps> = ({frames}) => {
 
       {/* PDF Settings */}
       <div className="bg-white p-4 my-4 rounded-md drop-shadow">
-        <h2 className="text-lg font-semibold">PDF Settings</h2>
+        <h2 className="text-lg font-semibold">Flipbook Page Settings</h2>
         <div className="flex flex-wrap space-x-2 mt-2">
           <div className="flex-1">
             <label
