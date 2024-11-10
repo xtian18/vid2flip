@@ -170,10 +170,10 @@ const ImportVideo: React.FC<ImportVideoProps> = ({
         <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50">
           <div className="bg-white p-8 rounded shadow-lg">
             <div className="flex items-center justify-center space-x-2">
-            <div
-  className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-transparent border-t-blue-500 align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-  role="status"
-></div>
+              <div
+                className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-transparent border-t-blue-500 align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                role="status"
+              ></div>
               <span>Extracting Frames...</span>
             </div>
           </div>
