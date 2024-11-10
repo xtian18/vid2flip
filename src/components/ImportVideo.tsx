@@ -1,5 +1,6 @@
 import { FaUpload } from "react-icons/fa6";
 import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg";
+import { useState } from "react";
 
 interface ImportVideoProps {
   videoPath: string;
@@ -22,6 +23,8 @@ const ImportVideo: React.FC<ImportVideoProps> = ({
   // frames,
   setFrames,
 }) => {
+  const [loading, setLoading] = useState<boolean>(false);
+
   const ffmpeg = createFFmpeg({ log: false });
 
   const handleFpsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,7 +54,7 @@ const ImportVideo: React.FC<ImportVideoProps> = ({
       console.error("No files selected or file input is null.");
     }
 
-    console.log(aspectRatio)
+    console.log(aspectRatio);
   };
 
   const loadFFmpeg = async () => {
@@ -61,6 +64,8 @@ const ImportVideo: React.FC<ImportVideoProps> = ({
   };
 
   const extractFrames = async () => {
+    setLoading(true);
+
     await loadFFmpeg();
 
     setFrames([]);
@@ -95,6 +100,8 @@ const ImportVideo: React.FC<ImportVideoProps> = ({
     }
 
     setFrames(extractedFrames);
+
+    setLoading(false);
   };
   return (
     <div className="bg-gray-100 flex-1 p-6">
@@ -130,7 +137,11 @@ const ImportVideo: React.FC<ImportVideoProps> = ({
         </div>
         <button
           className={`self-end px-4 py-2 border-2 rounded-md
-            ${!videoPath ? "bg-gray-400 cursor-not-allowed text-gray-700" : "text-purple-900 border-purple-800 hover:bg-purple-900 hover:text-white"}`}
+            ${
+              !videoPath
+                ? "bg-gray-400 cursor-not-allowed text-gray-700"
+                : "text-purple-900 border-purple-800 hover:bg-purple-900 hover:text-white"
+            }`}
           onClick={extractFrames}
           disabled={!videoPath}
         >
@@ -154,6 +165,20 @@ const ImportVideo: React.FC<ImportVideoProps> = ({
           />
         </div>
       </div>
+      {/* Popup for loading */}
+      {loading && (
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50">
+          <div className="bg-white p-8 rounded shadow-lg">
+            <div className="flex items-center justify-center space-x-2">
+            <div
+  className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-transparent border-t-blue-500 align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+  role="status"
+></div>
+              <span>Extracting Frames...</span>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
