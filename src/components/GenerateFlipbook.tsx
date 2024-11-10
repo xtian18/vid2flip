@@ -89,6 +89,7 @@ const GenerateFlipbook: React.FC<GenerateFlipbookProps> = ({frames}) => {
     let x = 10;
     let y = 10;
     pdf.setLineWidth(0.1);
+    pdf.setDrawColor(0, 0, 0, 50)
     pdf.setFontSize(8);
 
     frames.forEach(async (frame, index) => {
@@ -101,6 +102,22 @@ const GenerateFlipbook: React.FC<GenerateFlipbookProps> = ({frames}) => {
         pdf.addPage();
         y = 10;
       }
+
+      // Draw top guide lines
+      pdf.line(x, 0, x, 5);
+      pdf.line(x + flipBookPageWidth, 0, x + flipBookPageWidth, 5);
+
+      // Draw left guide lines
+      pdf.line(0, y, 5, y);
+      pdf.line(0, y + flipBookPageHeight, 5, y + flipBookPageHeight);
+
+      // Draw right guide lines
+      pdf.line(paperWidth, y, paperWidth - 5, y);
+      pdf.line(paperWidth, y + flipBookPageHeight, paperWidth - 5, y + flipBookPageHeight);
+
+      // Draw bottom guide lines
+      pdf.line(paperHeight, y, paperHeight - 5, y);
+      pdf.line(paperHeight, y + flipBookPageHeight, paperHeight - 5, y + flipBookPageHeight);
 
       pdf.rect(x, y, flipBookPageWidth, flipBookPageHeight, "S");
 
@@ -119,9 +136,9 @@ const GenerateFlipbook: React.FC<GenerateFlipbookProps> = ({frames}) => {
   return (
     <div className="bg-gray-100 flex-1 p-6">
       <h1 className="text-4xl font-bold">Generate Flipbook</h1>
-      {/* Flipbook page settings */}
+      {/* PDF settings */}
       <div className="bg-white p-4 my-4 rounded-md drop-shadow">
-        <h2 className="text-lg font-semibold">Flipbook Page Settings</h2>
+        <h2 className="text-lg font-semibold">PDF Settings</h2>
         <div className="flex flex-wrap space-x-2 mt-2">
           <div className="flex-1">
             <label
@@ -161,9 +178,9 @@ const GenerateFlipbook: React.FC<GenerateFlipbookProps> = ({frames}) => {
         </div>
       </div>
 
-      {/* PDF Settings */}
+      {/* Flipbook Page Settings */}
       <div className="bg-white p-4 my-4 rounded-md drop-shadow">
-        <h2 className="text-lg font-semibold">PDF Settings</h2>
+        <h2 className="text-lg font-semibold">Flipbook Page Settings</h2>
         <div className="flex flex-wrap space-x-2 mt-2">
           <div className="flex-1">
             <label
